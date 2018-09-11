@@ -1,0 +1,13 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<br><br><br>
+<div class="form-group">
+    <label style="color:#215252;">Do you have Copouns:  </label><br>
+    <label for="formGroupExampleInput">enter copoun here:&nbsp;</label>
+    <input type="text" minlength="5" maxlength="5" placeholder="Enter copoun here"  #copoun/><br>
+    <div>
+      <button class="btn btn-primary" (click)="calc(copoun.value)">Calcuate after Discounts</button>
+      &nbsp;&nbsp;
+      {{cartVal}}
+      {{discount}}
+    </div>
+</div>

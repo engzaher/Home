@@ -1,0 +1,58 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<div class="raw">
+    <div class="col-md-6">
+        <div class="media" *ngFor="let mov of movies">
+            <div class="media-left">
+                <img class="media-object" width="200" height="200" src="{{mov.imageUrl}}">
+            </div>
+            <div class="media-body">
+                <div class="media-body">
+                    <h4 class="media-heading">
+                        {{ mov.name }}
+                    </h4>
+                    Director: {{ mov.director }}
+                    <br><b>Year:</b> {{ mov.year }}<br><b>Classification:  </b>{{mov.classification}}<br>
+                    <b>Price:</b> {{ mov.price }} $ <br><b>Qunatity:  </b>{{mov.qty}}<br> to Add Item With Qunatity:<input #Quntity type="text" maxlength="2" (focus)="Quntity.value='' " />
+                    <button class="btn btn-primary" (click)="addNewMovie(mov, Quntity.value)"> ADD Item to Cart </button>
+                    <div *ngIf="mov.getQty()==0">
+                        <font size="25" color="#FF0000"><b>Sold Out !!!</b></font>
+                    </div>
+                    <div *ngIf="mov.getQty()<Quntity.value">
+                        <font size="25" color="#FF0000"><b>There is No enough pieces available </b></font>
+                    </div>
+                    <div *ngIf="Quntity.value<0">
+                        <font size="25" color="#FF0000"><b>Qunatity can't be negative value </b></font>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div>
+            <div>
+                <table class="table">
+                    <th> Name </th>
+                    <th>Pricce</th>
+                    <th>Quntity</th>
+                    <th>Remove Movie</th>
+                    <th>Update your Cart</th>
+                    <tr *ngFor="let mov of movies">
+                        <td *ngIf="mov.getAdded()==true"> {{mov.name}}</td>
+                        <td *ngIf="mov.getAdded()==true">{{mov.price}}</td>
+                        <td *ngIf="mov.getAdded()==true">{{mov.addedQty}}</td>
+                        <td *ngIf="mov.getAdded()==true"><button class="btn btn-danger" (click)="removeMovie(mov)">Remove Product</button></td>
+                        <td *ngIf="mov.getAdded()==true"><span class="glyphicon glyphicon-plus" aria-hidden="true" (click)="Incr(mov)"></span> <span class="glyphicon glyphicon-minus" aria-hidden="true" (click)="Decr(mov)"></span></td>
+                    </tr>
+                </table>
+                <div>
+                    Total Amount: <input type="text" #total (keyup)="0" value="{{CalculateTotal()}}" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <br><br>
+        
+        <app-copouns  [cartVal]="total.value"></app-copouns>
+    </div>
+</div>
